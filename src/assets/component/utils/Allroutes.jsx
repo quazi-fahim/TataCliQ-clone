@@ -25,13 +25,13 @@ const Allroutes = () => {
 <Route path='/product' element={<Product/>}/>
 <Route path="/products/:id" element={<ProductDetails/>} />
 <Route path="/subbrand/:subBrandName" element={<ProductDetails/>} /> 
-<Route path="/cart" element={<Cart/>} />
+
 <Route path='/luxury' element={<Luxury/>}/>
 <Route path='/cliqcare' element={<Cliqcare/>}/>
 <Route path='/signin' element={<Signin/>}/>
 <Route path='signup' element={<Signup/>}/>
 <Route path='*' element={<Pagenotfound/>}/>
-
+<Route path="/cart" element={<Cart/>} />
 <Route element={<Privateroutes/>}>
 <Route path='/trackorder' element={<Trackorder/>}/>
 <Route path='/giftcard' element={<Giftcard/>}/>

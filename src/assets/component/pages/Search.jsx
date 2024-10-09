@@ -98,7 +98,7 @@ const Search = () => {
               {filteredProducts.length > 0 ? (
                 filteredProducts.slice(0, 10).map(product => (
                   <ListItem key={product.id}>
-                    <Link to={`/product/${product.id}`}> {/* Link to product details page */}
+                    <Link to={`/products/${product.id}`}> {/* Link to product details page */}
                       {product.name} - {product.category} - {product.brand} - {product.title}
                     </Link>
                   </ListItem>

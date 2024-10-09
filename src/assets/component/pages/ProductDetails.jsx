@@ -36,7 +36,7 @@ const ProductDetails = () => {
           <Box m="200px">
             <h1>{product.name}</h1>
             <img src={product.image} alt={product.name} />
-            <p>{product.description}</p>
+            <p>{product.title}</p>
             <p>Price: ${product.price}</p>
             <Button bg="lightblue" onClick={() => handleAddToCart(product)}>Add to Cart</Button>
         </Box>
