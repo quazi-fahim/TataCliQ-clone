@@ -9,6 +9,7 @@ import {
   PopoverBody,
   PopoverArrow,
   Grid,
+  useBreakpointValue,
 } from "@chakra-ui/react";
 import { ChevronDownIcon, ChevronRightIcon, ChevronUpIcon } from "@chakra-ui/icons";
 import axios from "axios";
@@ -39,7 +40,7 @@ const categories = [
 // Main Component
 const CategoryFilter = () => {
   const [hoveredCategory, setHoveredCategory] = useState(null);
-  const [isCategoryHovered, setIsCategoryHovered] = useState(false); // New state for hovering over "Category" text
+  const [isCategoryHovered, setIsCategoryHovered] = useState(false);
   const navigate = useNavigate();
 
   // Handle category click and navigate to category page
@@ -63,12 +64,12 @@ const CategoryFilter = () => {
             {isCategoryHovered ? <ChevronUpIcon /> : <ChevronDownIcon />}
           </Text>
         </PopoverTrigger>
-        <PopoverContent bg="white" color="black" width="800px">
+        <PopoverContent bg="white" color="black" width={useBreakpointValue({ base: "100%", md: "800px" })}>
           <PopoverArrow bg="white" />
           <PopoverBody>
-            <Flex>
+            <Flex direction={{ base: "row", md: "row" }}>
               {/* Categories Section */}
-              <Box flex="1" pr={4}>
+              <Box flex="1" pr={4} mb={{ base: 4, md: 0 }}>
                 {categories.map((category) => (
                   <Flex
                     key={category.name}
@@ -93,7 +94,7 @@ const CategoryFilter = () => {
 
               {/* Subcategories Section */}
               {hoveredCategory && (
-                <Box flex="1" pl={4} borderLeft="1px solid black">
+                <Box flex="1" pl={4} borderLeft={{ base: "none", md: "1px solid black" }}>
                   {categories
                     .find((category) => category.name === hoveredCategory)
                     .subcategories.map((subcat) => (
@@ -143,7 +144,7 @@ const CategoryPage = () => {
         Products in {categoryName}
       </Text>
       {products.length > 0 ? (
-        <Grid templateColumns="repeat(3, 1fr)" gap={4}>
+        <Grid templateColumns={{ base: "repeat(1, 1fr)", md: "repeat(3, 1fr)" }} gap={4}>
           {products.map((product) => (
             <Box
               key={product.id}
@@ -168,5 +169,4 @@ const CategoryPage = () => {
   );
 };
 
-export default CategoryFilter 
-
+export default CategoryFilter;

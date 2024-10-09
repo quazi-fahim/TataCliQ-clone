@@ -7,7 +7,7 @@ import {
   Button,
   Grid,
   Image,
-  Text,
+
   Stack,
   Heading,
   Spinner,

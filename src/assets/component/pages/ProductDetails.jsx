@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../utils/Redux/cart/cartaction';
+import { Box, Button, Center } from '@chakra-ui/react';
 
 const ProductDetails = () => {
     const { id } = useParams();
@@ -31,13 +32,15 @@ const ProductDetails = () => {
     if (!product) return <p>Loading product details...</p>;
 
     return (
-        <div>
+      <Center>
+          <Box m="200px">
             <h1>{product.name}</h1>
             <img src={product.image} alt={product.name} />
             <p>{product.description}</p>
             <p>Price: ${product.price}</p>
-            <button onClick={() => handleAddToCart(product)}>Add to Cart</button>
-        </div>
+            <Button bg="lightblue" onClick={() => handleAddToCart(product)}>Add to Cart</Button>
+        </Box>
+      </Center>
     );
 };
 

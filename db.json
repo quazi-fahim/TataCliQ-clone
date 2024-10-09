@@ -44,6 +44,11 @@
       "id": "f06d",
       "contact": "84568555000",
       "isEmail": false
+    },
+    {
+      "id": "e5e5",
+      "contact": "5784542857855",
+      "isEmail": false
     }
   ],
   "products": [
@@ -743,5 +748,24 @@
       "category": "gadgets",
       "price": 6999
     }
+  ],
+  "cart":[
+    {
+      "id": "86",
+      "brand": "asus",
+      "title": "Virtual Reality Headset",
+      "image": "https://picsum.photos/209",
+      "category": "gadgets",
+      "price": 14999
+    },
+    {
+      "id": "87",
+      "brand": "dell",
+      "title": "Fitness Smartwatch",
+      "image": "https://picsum.photos/210",
+      "category": "gadgets",
+      "price": 6999
+    }
   ]
+  
 }

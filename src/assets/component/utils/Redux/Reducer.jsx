@@ -55,6 +55,7 @@ import {
           ...state,
           saveUser: true,
           loading: false,
+          isLoggedIn: true,
         };
       case SAVE_USER_ERROR:
         return {
