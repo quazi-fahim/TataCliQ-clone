@@ -21,7 +21,7 @@ const Allroutes = () => {
 <Routes>
 <Route path='/' element={<Tatacliq/>}/>
 <Route path="/product" element={<Product/>} />
-<Route path="/brand/product" element={<Product/>} />
+
 <Route path="/products/:id" element={<ProductDetails/>} />
 <Route path="/cart" element={<Cart/>} />
 <Route path='/luxury' element={<Luxury/>}/>

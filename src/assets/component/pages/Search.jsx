@@ -13,14 +13,14 @@ import {
   InputRightElement,
   Button,
 } from '@chakra-ui/react';
-import { Link, useLocation } from 'react-router-dom'; // Import Link and useLocation from react-router-dom
+import { Link, useLocation } from 'react-router-dom';
 
 const Search = () => {
   const [products, setProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const [isFocused, setIsFocused] = useState(false); // State to track focus
+  const [isFocused, setIsFocused] = useState(false);
 
-  const location = useLocation(); // Hook to get the current route
+  const location = useLocation();
 
   // Fetch products from the JSON server
   useEffect(() => {
@@ -35,28 +35,32 @@ const Search = () => {
 
   // Reset search input and close popover when navigating to a different route
   useEffect(() => {
-    setSearchTerm(''); // Clear the search term
-    setIsFocused(false); // Close the popover
-  }, [location]); // Trigger when the route changes
+    setSearchTerm('');
+    setIsFocused(false);
+  }, [location]);
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
   };
 
   const handleClosePopover = () => {
-    setSearchTerm(''); // Clear the search term
-    setIsFocused(false); // Close the popover
+    setSearchTerm('');
+    setIsFocused(false);
   };
 
-  const filteredProducts = products.filter(product =>
-    product.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    product.brand.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    product.category.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredProducts = products.filter(product => {
+    const searchWords = searchTerm.toLowerCase().split(' ');
+
+    return searchWords.every(word => 
+      product.title.toLowerCase().includes(word) ||
+      product.brand.toLowerCase().includes(word) ||
+      product.category.toLowerCase().includes(word)
+    );
+  });
 
   return (
     <Box>
-      <Popover isOpen={searchTerm.length > 0}>
+      <Popover isOpen={isFocused || searchTerm.length > 0} onClose={() => setIsFocused(false)}>
         <PopoverTrigger>
           <InputGroup>
             <Input
@@ -67,24 +71,23 @@ const Search = () => {
               w="500px"
               onChange={handleSearchChange}
               onFocus={() => setIsFocused(true)} // Open the popover on focus
-              onBlur={() => setIsFocused(false)} // Close the popover on blur
-              backgroundColor={isFocused || searchTerm.length > 0 ? 'white' : '#4A4A4'} // Change background based on focus
-              transition="background-color 0.3s, border-color 0.3s" // Smooth transition for background and border color change
-              borderColor={isFocused || searchTerm.length > 0 ? 'gray.300' : 'gray.400'} // Change border color based on focus
-              _hover={{ borderColor: 'white' }} // Change border color on hover
+              backgroundColor={isFocused || searchTerm.length > 0 ? 'white' : '#4A4A4'}
+              transition="background-color 0.3s, border-color 0.3s"
+              borderColor={isFocused || searchTerm.length > 0 ? 'gray.300' : 'gray.400'}
+              _hover={{ borderColor: 'white' }}
               _focus={{
-                borderColor: 'white', // Change border color to white on focus
-                boxShadow: 'none', // Remove default blue outline (box shadow)
+                borderColor: 'white',
+                boxShadow: 'none',
               }}
             />
-            {searchTerm.length > 0 && ( // Show cross button only if searchTerm is not empty
+            {searchTerm.length > 0 && (
               <InputRightElement>
                 <Button 
                   variant="link" 
-                  onClick={handleClosePopover} // Close popover when clicked
+                  onClick={handleClosePopover}
                   aria-label="Close"
                 >
-                  &times; {/* Cross icon (times) */}
+                  &times;
                 </Button>
               </InputRightElement>
             )}
@@ -97,7 +100,7 @@ const Search = () => {
               {filteredProducts.length > 0 ? (
                 filteredProducts.slice(0, 10).map(product => (
                   <ListItem key={product.id}>
-                    <Link to={`/product/${product.id}`}> {/* Link to product details page */}
+                    <Link to={`/product/${product.id}`}>
                       {product.name} - {product.category} - {product.brand} - {product.title}
                     </Link>
                   </ListItem>
